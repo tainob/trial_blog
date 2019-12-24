@@ -14,6 +14,7 @@ gem 'bootsnap', '>= 1.1.0', require: false
 
 gem 'devise'
 gem 'devise-bootstrap-views'
+gem 'bootstrap-sass', '3.3.7'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
