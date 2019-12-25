@@ -14,8 +14,13 @@ gem 'bootsnap', '>= 1.1.0', require: false
 gem 'jquery-rails', '4.3.1'
 
 gem 'devise'
-gem 'devise-bootstrap-views'
-gem 'bootstrap-sass', '3.3.7'
+
+# 日本語化
+gem 'rails-i18n', '~> 5.1'
+gem 'devise-i18n'
+
+gem 'bootstrap', '~> 4.3.1'
+gem 'devise-bootstrap-views', '~> 1.0'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'
