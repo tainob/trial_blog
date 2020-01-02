@@ -3,6 +3,8 @@ class UserPost < ApplicationRecord
 
   before_save :change_date_format
 
+  validates :visible, acceptance: true
+
   private
 
     def change_date_format

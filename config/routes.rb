@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get '/new'    => 'blogs#new'
   post '/write' => 'blogs#create'
 
+  get '/users'    => 'blogs#index'
+
   devise_scope :user do
     get 'users/sign_out' => 'devise/sessions#destroy'
   end

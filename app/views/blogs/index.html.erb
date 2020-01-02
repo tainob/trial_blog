@@ -3,6 +3,8 @@
 <a href="/new">投稿する</a>
 
 <ul class="list_user_posts">
+  <hr>
+
   <% @user_posts.each do |user_post| %>
 
     <% if user_signed_in? %>
@@ -17,6 +19,7 @@
             <% end %>
             <p><%= user_post.content %></p>
             <p><%= user_post.created_at.strftime("%Y/%m/%d %H:%M") %> 投稿</p>
+            <hr>
           </li>
         <% end %>
 

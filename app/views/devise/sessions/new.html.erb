@@ -24,3 +24,9 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
+
+    <% @users.each do |user| %>
+      <li>
+        <%= link_to user.username, user %>
+      </li>
+    <% end %>

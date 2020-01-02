@@ -4,9 +4,16 @@
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :ユーザ名 %><br />
+    <%= f.text_field :username, autocomplete: "username", autofocus: true %>
   </div>
+  <br />
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autocomplete: "email" %>
+  </div>
+  <br />
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
     <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
@@ -20,22 +27,25 @@
       <em>最低 <%= @minimum_password_length %>文字</em>
     <% end %>
   </div>
+  <br />
 
   <div class="field">
     <%= f.label :password_confirmation %><br />
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
+  <br />
 
   <div class="field">
-    <%= f.label :current_password %> <i>(確認用)</i><br />
+    <%= f.label :current_password %> <i>(必須)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
   <div class="actions">
     <%= f.submit "上記の情報に変更する" %>
   </div>
+  <br />
 <% end %>
 
-<p><%= button_to "アカウントを削除する", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
+<p><%= button_to "アカウントを削除する", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p><br />
 
 <%= link_to "戻る", :back %>
