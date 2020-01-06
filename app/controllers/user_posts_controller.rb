@@ -16,7 +16,7 @@ class UserPostsController < ApplicationController
     @user_post.content = params[:user_post][:content]
     @user_post.category = params[:user_post][:category]
 
-    if params[:user_post][:visible] == "0"
+    if params[:user_post][:visible] == "1"
       @user_post.visible = false
     else
       @user_post.visible = true
