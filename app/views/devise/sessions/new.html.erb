@@ -25,8 +25,13 @@
 
 <%= render "devise/shared/links" %>
 
-    <% @users.each do |user| %>
-      <li>
-        <%= link_to user.username, user %>
-      </li>
-    <% end %>
+<br />
+みんなのブログを見る
+<li><%= link_to "日記",     list_path(category: "日記") %></li>
+<li><%= link_to "動物",     list_path(category: "動物") %></li>
+<li><%= link_to "旅行",     list_path(category: "旅行") %></li>
+<li><%= link_to "スポーツ",  list_path(category: "スポーツ") %></li>
+<li><%= link_to "音楽",     list_path(category: "音楽") %></li>
+<li><%= link_to "アイドル",  list_path(category: "アイドル") %></li>
+<li><%= link_to "写真",     list_path(category: "写真") %></li>
+<li><%= link_to "その他",     list_path(category: "その他") %></li>

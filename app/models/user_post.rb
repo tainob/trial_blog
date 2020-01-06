@@ -3,7 +3,7 @@ class UserPost < ApplicationRecord
 
   before_save :change_date_format
 
-  validates :visible, acceptance: true
+  validates :visible, inclusion: { in: [true, false] }
 
   private
 

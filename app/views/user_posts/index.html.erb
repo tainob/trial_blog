@@ -1,0 +1,35 @@
+<%= render 'shared/flash_messages' %>
+
+<h3><%= link_to "ブログを書く", "new" %></h3><br />
+
+<h4>これまでの投稿</h4>
+<ul class="list_user_posts">
+  <hr>
+
+  <% @user_posts.each do |user_post| %>
+
+    <li>
+      <h2><%= user_post.title %></h2>
+      <% if user_post.visible == false %>
+        <p>&lt;&lt;非表示設定&gt;&gt;</p>
+      <% end %>
+      <% if user_post.image != "" %>
+        <p><img src="<%= user_post.image %>"></p>
+      <% end %>
+      <p><%= user_post.content %></p>
+      <p><%= user_post.created_at.strftime("%Y/%m/%d %H:%M") %> (<%= user_post.category %>)カテゴリーに投稿</p>
+      <hr>
+    </li>
+
+  <% end %>
+</ul><br />
+
+<h3>みんなのブログを見る</h3>
+<li><%= link_to "日記",     list_path(category: "日記") %></li>
+<li><%= link_to "動物",     list_path(category: "動物") %></li>
+<li><%= link_to "旅行",     list_path(category: "旅行") %></li>
+<li><%= link_to "スポーツ",  list_path(category: "スポーツ") %></li>
+<li><%= link_to "音楽",     list_path(category: "音楽") %></li>
+<li><%= link_to "アイドル",  list_path(category: "アイドル") %></li>
+<li><%= link_to "写真",     list_path(category: "写真") %></li>
+<li><%= link_to "その他",     list_path(category: "その他") %></li>

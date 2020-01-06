@@ -1,0 +1,30 @@
+<ul class="list_user_posts">
+
+<h1>みんなのブログ（<%= @category %>）</h1>
+
+  <% @user_posts.each do |user_post| %>
+
+    <% if user_signed_in? && user_post.user_id != current_user.id %>
+
+      <% unless user_post.nil? %>
+
+        <li>
+          <hr>
+          <h2><%= user_post.title %></h2>
+          <% if user_post.image != "" %>
+            <p><img src="<%= user_post.image %>"></p>
+          <% end %>
+          <p><%= user_post.content %></p>
+          <p>
+            [<%= User.find(user_post.user_id).username %>]
+            <%= user_post.created_at.strftime("%Y/%m/%d %H:%M") %> 投稿
+          </p>
+        </li>
+
+      <% end %>
+
+    <% end %>
+
+  <% end %>
+
+</ul>
