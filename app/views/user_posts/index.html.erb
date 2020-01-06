@@ -1,8 +1,8 @@
 <%= render 'shared/flash_messages' %>
 
-<h3><%= link_to "ブログを書く", "new" %></h3><br />
+<h2><%= link_to "ブログを書く", "new" %></h2><br />
 
-<h4>これまでの投稿</h4>
+<h4>〜 これまでの投稿 〜</h4>
 <ul class="list_user_posts">
   <hr>
 
@@ -10,7 +10,7 @@
 
     <li>
       <h2><%= user_post.title %></h2>
-      <% if user_post.visible == false %>
+      <% if user_post.visible == true %>
         <p>&lt;&lt;非表示設定&gt;&gt;</p>
       <% end %>
       <% if user_post.image != "" %>
@@ -18,6 +18,7 @@
       <% end %>
       <p><%= user_post.content %></p>
       <p><%= user_post.created_at.strftime("%Y/%m/%d %H:%M") %> (<%= user_post.category %>)カテゴリーに投稿</p>
+      <p><%= link_to "編集する", "/user_posts/#{user_post.id}/edit" %>　　　<%#= link_to "削除する", "/user_posts/#{user_post.id}/destroy" %></p>
       <hr>
     </li>
 
