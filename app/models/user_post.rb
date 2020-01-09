@@ -1,5 +1,6 @@
 class UserPost < ApplicationRecord
   belongs_to :user
+  has_many :comments, dependent: :destroy
 
   before_save :change_date_format
 

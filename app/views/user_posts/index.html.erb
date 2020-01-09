@@ -18,7 +18,7 @@
       <% end %>
       <p><%= user_post.content %></p>
       <p><%= user_post.created_at.strftime("%Y/%m/%d %H:%M") %> (<%= user_post.category %>)カテゴリーに投稿</p>
-      <p><%= link_to "編集する", "/user_posts/#{user_post.id}/edit" %>　　　<%#= link_to "削除する", "/user_posts/#{user_post.id}/destroy" %></p>
+      <p><%= link_to "編集する", "/user_posts/#{user_post.id}/edit" %></p>
       <hr>
     </li>
 
