@@ -1,8 +1,25 @@
 class UserPostsController < ApplicationController
 
-  #投稿一覧ページ（ログイン後ページ）
+  #ログイン後ページ
   def index
-    @user_posts = UserPost.order(create_date: :DESC).where(user_id: current_user.id)
+  end
+
+  #自分の投稿一覧ページ
+  def mylist
+    @category = params[:category]
+    @user_posts = UserPost.order(create_date: :DESC)
+                    .where(category: @category)
+                    .where(user_id: current_user.id)
+  end
+
+  #他ユーザ投稿一覧ページ
+  def list
+    @category = params[:category]
+    @user_posts = UserPost.order(create_date: :DESC)
+                    .where('release_date <= ?', DateTime.now)
+                    .where(invisible: false)
+                    .where(category: @category)
+                    .where.not(user_id: current_user.id)
   end
 
   #登録ページ
@@ -22,7 +39,7 @@ class UserPostsController < ApplicationController
                       title: params[:user_post][:title],
                       content: params[:user_post][:content],
                       category: params[:user_post][:category],
-                      visible: params[:user_post][:visible])
+                      invisible: params[:user_post][:invisible])
     redirect_to("/")
   end
 
@@ -43,10 +60,10 @@ class UserPostsController < ApplicationController
     @user_post.category = params[:user_post][:category]
 
     #非表示設定
-    if params[:user_post][:visible] == "0"
-      @user_post.visible = false
+    if params[:user_post][:invisible].nil?
+      @user_post.invisible = false
     else
-      @user_post.visible = true
+      @user_post.invisible = params[:user_post][:invisible]
     end if
 
     @user_post.create_date = DateTime.now
@@ -67,19 +84,10 @@ class UserPostsController < ApplicationController
     end
   end
 
-  #他ユーザ投稿一覧ページ
-  def list
-    @category = params[:category]
-    @user_posts = UserPost.order(create_date: :DESC)
-                    .where('release_date <= ?', DateTime.now)
-                    .where(visible: false)
-                    .where(category: @category)
-  end
-
   private
 
     def user_post_params
-      params.permit(:title, :image, :content, :category, :visible, :create_date, :release_date, :user_id)
+      params.permit(:title, :image, :content, :category, :invisible, :create_date, :release_date, :user_id)
     end
 
 end

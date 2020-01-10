@@ -21,7 +21,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
 
     if @comment.save
-
+      redirect_to("/")
     else
       render :action => "new"
     end

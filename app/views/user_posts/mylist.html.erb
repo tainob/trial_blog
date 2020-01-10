@@ -1,6 +1,6 @@
 <ul class="list_user_posts">
 
-<h1>みんなのブログ（<%= @category %>）</h1>
+<h1>過去の投稿（<%= @category %>）</h1>
 
   <% if @user_posts.count > 0 %>
 
@@ -8,14 +8,15 @@
       <% @user_posts.each do |user_post| %>
         <hr>
         <h2><%= user_post.title %></h2>
+        <% if user_post.invisible == true %>
+          <p>&lt;&lt;非表示設定&gt;&gt;</p>
+        <% end %>
         <% if user_post.image != "" %>
           <p><img src="<%= user_post.image %>"></p>
         <% end %>
         <p><%= user_post.content %></p>
-        <p>
-          [<%= User.find(user_post.user_id).username %>]
-          <%= user_post.created_at.strftime("%Y/%m/%d %H:%M") %> 投稿
-        </p>
+        <p><%= user_post.created_at.strftime("%Y/%m/%d %H:%M") %> 投稿</p>
+        <p><%= link_to "編集する", "/user_posts/#{user_post.id}/edit" %></p>
         <p><%= link_to "コメントを見る", "/comments/#{user_post.id}/new" %></p>
       <% end %>
     </li>

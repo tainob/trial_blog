@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_09_045908) do
+ActiveRecord::Schema.define(version: 2020_01_09_084611) do
 
   create_table "comments", force: :cascade do |t|
     t.string "content"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2020_01_09_045908) do
     t.text "image"
     t.text "content"
     t.string "category"
-    t.boolean "visible"
+    t.boolean "invisible"
     t.datetime "create_date"
     t.datetime "release_date"
     t.datetime "created_at", null: false

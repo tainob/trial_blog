@@ -1,6 +1,4 @@
-<h3>
-  投稿内容を変更する
-</h3>
+<h2>投稿内容を変更する</h2><br />
 
 <div class="form-group">
   <%= bootstrap_form_for(@user_post) do |f| %>
@@ -9,9 +7,12 @@
     <%= f.text_field :image, label: "画像URL" %><br />
     <%= f.text_area :content, label: "記事" %><br />
     <%= f.select :category, ["日記", "動物", "旅行", "スポーツ", "音楽", "アイドル", "写真", "その他" ], label: "カテゴリー" %><br />
-    <%= f.check_box :visible, label: "非公開にする" %><br />
+    <%= f.check_box :invisible, label: "非公開にする" %><br />
     <%= f.datetime_select :release_date,:prefix=>"release_date_input", label: "公開日時を指定する" %><br />
-    <%= f.submit "変更",　class: 'btn btn-primary' %>
-    <%= button_to("削除", "/user_posts/#{@user_post.id}", method: :delete) %>
+    <%= f.submit "変更する",　class: 'btn btn-primary' %>
   <% end %>
-</div>
+</div><br />
+
+<%= button_to("投稿を削除する", "/user_posts/#{@user_post.id}", method: :delete, data: {confirm: '投稿を削除します。よろしいですか？'}) %><br />
+
+<%= link_to "戻る", :back %>

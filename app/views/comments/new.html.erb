@@ -1,26 +1,48 @@
-<h3>コメント</h3>
+<ul class="list_user_posts">
+  <h2><%= @user_post.title %></h2>
+  <% if @user_post.image != "" %>
+    <p><img src="<%= @user_post.image %>"></p>
+  <% end %>
+  <p><%= @user_post.content %></p>
+  <p><%= @user_post.created_at.strftime("%Y/%m/%d %H:%M") %> (<%= @user_post.category %>)カテゴリーに投稿</p>
+</ul>
 
-  <% @comments.each do |comment| %>
-    <% unless comment.nil? %>
+<hr>
+
+<h3>[寄せられたコメント]</h3>
+
+<ul class="list_user_posts">
+  <% if @comments.count > 0 %>
+    <% @comments.each do |comment| %>
       <li>
-          <hr>
-          <p><%= comment.content %></p>
-          <p>
-            [<%= User.find(comment.user_id).username %>]
-            <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %> 投稿
-            <% if comment.user_id == current_user.id %>
-              <%= button_to "削除", "/comments/#{comment.id}", method: :delete %>
-            <% end %>
-          </p>
-        </li>
+        <p><%= comment.content %></p>
+        <p>
+          [<%= User.find(comment.user_id).username %>]
+          <%= comment.created_at.strftime("%Y/%m/%d %H:%M") %> 投稿
+          <% if comment.user_id == current_user.id || @user_post.user_id == current_user.id %>
+            <%= button_to "コメントを削除する", "/comments/#{comment.id}", method: :delete, data: {confirm: '投稿を削除します。よろしいですか？'} %>
+          <% end %>
+        </p>
+      </li>
     <% end %>
-  <% end %>
 
-<div class="form-group">
-  <%= bootstrap_form_for(@comment) do |f| %>
-    <%= render 'shared/error_messages', model: f.object %>
-    <%= f.hidden_field :user_post_id, :value => @user_post.id %><br />
-    <%= f.text_area :content, label: "." %><br />
-    <%= f.submit "投稿",　class: 'btn btn-primary' %>
+  <% else %>
+    まだコメントはありません。
+
   <% end %>
-</div>
+</ul>
+
+<hr>
+
+<% if user_signed_in? %>
+  <h3>[コメントを書きこむ]</h3>
+
+  <div class="form-group">
+    <%= bootstrap_form_for(@comment) do |f| %>
+      <%= render 'shared/error_messages', model: f.object %>
+      <%= f.hidden_field :user_post_id, :value => @user_post.id %><br />
+      <%= f.text_area :content, label: "." %><br />
+      <%= f.submit "投稿",　class: 'btn btn-primary' %>
+    <% end %>
+  </div>
+<% end %>

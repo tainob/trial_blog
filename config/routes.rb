@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   post "user_posts/:id/update"  => "user_posts#update"  #ブログ更新
   delete "user_posts/:id"       => 'user_posts#destroy' #ブログ削除
 
+  get '/mylist', to: 'user_posts#mylist'  #自分のブログの一覧を表示（カテゴリ別）
   get '/list',   to: 'user_posts#list'    #他人のブログの一覧を表示（カテゴリ別）
 
   get  "comments/:id/new"   => 'comments#new'     #コメント入力
