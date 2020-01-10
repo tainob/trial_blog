@@ -8,13 +8,22 @@ class CommentsController < ApplicationController
 
   #削除
   def destroy
+    #ログイン前の場合、ログイン画面に遷移
+    redirect_to(new_user_session_path) unless user_signed_in?
+
     @comment = Comment.find(params[:id])
-    @comment.destroy
-    redirect_to("/")
+    if @comment.destroy
+      redirect_to("/")
+    else
+      render :new
+    end
   end
 
   #DB書込み
   def create
+    #ログイン前の場合、ログイン画面に遷移
+    redirect_to(new_user_session_path) unless user_signed_in?
+
     @comment = Comment.new
     @comment.user_post_id = params[:comment][:user_post_id]
     @comment.content = params[:comment][:content]

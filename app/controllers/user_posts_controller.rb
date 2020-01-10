@@ -1,11 +1,14 @@
 class UserPostsController < ApplicationController
 
-  #ログイン後ページ
+  #TOPページ
   def index
   end
 
   #自分の投稿一覧ページ
   def mylist
+    #ログイン前の場合、ログイン画面に遷移
+    redirect_to(new_user_session_path) unless user_signed_in?
+
     @category = params[:category]
     @user_posts = UserPost.order(create_date: :DESC)
                     .where(category: @category)
@@ -15,43 +18,70 @@ class UserPostsController < ApplicationController
   #他ユーザ投稿一覧ページ
   def list
     @category = params[:category]
+
     @user_posts = UserPost.order(create_date: :DESC)
-                    .where('release_date <= ?', DateTime.now)
-                    .where(invisible: false)
-                    .where(category: @category)
-                    .where.not(user_id: current_user.id)
+                  .where('release_date <= ?', DateTime.now)
+                  .where(invisible: false)
+                  .where(category: @category)
+
+    #ログイン済の場合、自分の書き込みを除外する
+    if user_signed_in?
+      @user_posts = @user_posts.where.not(user_id: current_user.id)
+    end
   end
 
   #登録ページ
   def new
+    #ログイン前の場合、ログイン画面に遷移
+    redirect_to(new_user_session_path) unless user_signed_in?
+
     @user_post = UserPost.new
   end
 
   #編集ページ
   def edit
+    #ログイン前の場合、ログイン画面に遷移
+    redirect_to(new_user_session_path) unless user_signed_in?
+
     @user_post = UserPost.find(params[:id])
   end
 
   #更新
   def update
+    #ログイン前の場合、ログイン画面に遷移
+    redirect_to(new_user_session_path) unless user_signed_in?
+
     @user_post = UserPost.find(params[:id])
-    @user_post.update(
+    if @user_post.update(
                       title: params[:user_post][:title],
+                      image: params[:user_post][:image],
                       content: params[:user_post][:content],
                       category: params[:user_post][:category],
                       invisible: params[:user_post][:invisible])
-    redirect_to("/")
+      redirect_to("/")
+    else
+      render :edit
+    end
   end
 
   #削除
   def destroy
+    #ログイン前の場合、ログイン画面に遷移
+    redirect_to(new_user_session_path) unless user_signed_in?
+
     @user_post = UserPost.find(params[:id])
-    @user_post.destroy
-    redirect_to("/")
+    if @user_post.destroy
+      redirect_to("/")
+    else
+      render :edit
+    end
   end
 
   #DB書込み
   def create
+    #ログイン前の場合、ログイン画面に遷移
+    redirect_to(new_user_session_path) unless user_signed_in?
+
     @user_post = UserPost.new(user_post_params)
 
     @user_post.title = params[:user_post][:title]

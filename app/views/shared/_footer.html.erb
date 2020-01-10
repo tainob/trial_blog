@@ -10,10 +10,14 @@
           <li class="nav-item active">
             <%= link_to 'アカウント情報を変更する', edit_user_registration_path, class: 'nav-link' %>
           </li>
+        <% else %>
           <li class="nav-item active">
-            <%= link_to "TOPに戻る", "/" %>
+            <%= link_to 'ログインする', new_user_session_path, method: :get, class: 'nav-link' %>
           </li>
         <% end %>
+        <li class="nav-item active">
+          <%= link_to "TOPに戻る", "/" %>
+        </li>
       </ul>
     </div>
   </nav>

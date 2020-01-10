@@ -1,16 +1,20 @@
+<h1>ブログ（学習用）</h1>
+
 <%= render 'shared/flash_messages' %>
 
-<h2><%= link_to "ブログを書く", "new" %></h2><br />
+<h3><%= link_to "ブログを書く", "new" %></h3>
 
-<h3>〜 過去の投稿 〜</h3>
-<li><%= link_to "日記",     mylist_path(category: "日記") %></li>
-<li><%= link_to "動物",     mylist_path(category: "動物") %></li>
-<li><%= link_to "旅行",     mylist_path(category: "旅行") %></li>
-<li><%= link_to "スポーツ",  mylist_path(category: "スポーツ") %></li>
-<li><%= link_to "音楽",     mylist_path(category: "音楽") %></li>
-<li><%= link_to "アイドル",  mylist_path(category: "アイドル") %></li>
-<li><%= link_to "写真",     mylist_path(category: "写真") %></li>
-<li><%= link_to "その他",   mylist_path(category: "その他") %></li>
+<% if user_signed_in? %>
+  <h3>〜 過去の投稿 〜</h3>
+  <li><%= link_to "日記",     mylist_path(category: "日記") %></li>
+  <li><%= link_to "動物",     mylist_path(category: "動物") %></li>
+  <li><%= link_to "旅行",     mylist_path(category: "旅行") %></li>
+  <li><%= link_to "スポーツ",  mylist_path(category: "スポーツ") %></li>
+  <li><%= link_to "音楽",     mylist_path(category: "音楽") %></li>
+  <li><%= link_to "アイドル",  mylist_path(category: "アイドル") %></li>
+  <li><%= link_to "写真",     mylist_path(category: "写真") %></li>
+  <li><%= link_to "その他",   mylist_path(category: "その他") %></li>
+<% end %>
 
 <hr>
 
