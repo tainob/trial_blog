@@ -28,11 +28,13 @@ class CommentsController < ApplicationController
     @comment.user_post_id = params[:comment][:user_post_id]
     @comment.content = params[:comment][:content]
     @comment.user = current_user
+    @user_post_id = params[:comment][:user_post_id]
 
     if @comment.save
       redirect_to("/")
     else
-      render :action => "new"
+      flash[:error] = @comment.errors.full_messages.first
+      redirect_back(fallback_location: "comments/#{@user_post_id}/new")
     end
   end
 end

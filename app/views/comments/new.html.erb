@@ -39,7 +39,7 @@
 
   <div class="form-group">
     <%= bootstrap_form_for(@comment) do |f| %>
-      <%= render 'shared/error_messages', model: f.object %>
+      <%= render 'shared/flash_messages' %>
       <%= f.hidden_field :user_post_id, :value => @user_post.id %><br />
       <%= f.text_area :content, label: "." %><br />
       <%= f.submit "投稿",　class: 'btn btn-primary' %>

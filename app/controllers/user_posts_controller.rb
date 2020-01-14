@@ -44,6 +44,7 @@ class UserPostsController < ApplicationController
     redirect_to(new_user_session_path) unless user_signed_in?
 
     @user_post = UserPost.find(params[:id])
+    #ログイン前の場合、ログイン画面に遷移
   end
 
   #更新
