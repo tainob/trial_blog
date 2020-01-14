@@ -22,6 +22,7 @@ gem 'devise-i18n'
 gem 'bootstrap', '~> 4.3.1'
 gem 'devise-bootstrap-views', '~> 1.0'
 gem 'bootstrap_form'
+gem 'will_paginate-bootstrap'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'

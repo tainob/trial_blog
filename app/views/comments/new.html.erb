@@ -11,8 +11,8 @@
 
 <h3>[寄せられたコメント]</h3>
 
-<ul class="list_user_posts">
-  <% if @comments.count > 0 %>
+<% if @comments.count > 0 %>
+  <ul class="list_user_posts">
     <% @comments.each do |comment| %>
       <li>
         <p><%= comment.content %></p>
@@ -25,12 +25,14 @@
         </p>
       </li>
     <% end %>
+  </ul>
 
-  <% else %>
-    まだコメントはありません。
+  <%= will_paginate @comments, :renderer => BootstrapPagination::Rails %>
 
-  <% end %>
-</ul>
+<% else %>
+  まだコメントはありません。
+
+<% end %>
 
 <hr>
 

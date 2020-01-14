@@ -13,6 +13,9 @@ class UserPostsController < ApplicationController
     @user_posts = UserPost.order(create_date: :DESC)
                     .where(category: @category)
                     .where(user_id: current_user.id)
+
+    #ページング処理
+    @user_posts = @user_posts.paginate(:page => params[:page], :per_page => 10)
   end
 
   #他ユーザ投稿一覧ページ
@@ -26,6 +29,9 @@ class UserPostsController < ApplicationController
 
     #ログイン済の場合、自分の書き込みを除外する
     @user_posts = @user_posts.where.not(user_id: current_user.id) if user_signed_in?
+
+    #ページング処理
+    @user_posts = @user_posts.paginate(:page => params[:page], :per_page => 10)
   end
 
   #登録ページ

@@ -4,7 +4,7 @@ class UserPost < ApplicationRecord
 
   before_save :change_date_format
 
-  VALID_URL_REGEX = /https*\:\/\/"?([\-_\.\!\~\*\'\(\)a-z0-9\;\/\?\:@&=\+\$\,\%\#]+(jpg|jpeg|gif|png))/i
+  VALID_URL_REGEX = /\A(https*\:\/\/\"?([\-_\.\!\~\*\'\(\)a-z0-9\;\/\?\:@&=\+\$\,\%\#])*)+(jpg|jpeg|gif|png)\z|(\A\z)/i
 
   validates :title, presence: true, length: { maximum: 30 }
   validates :content, presence: true, length: { maximum: 140 }

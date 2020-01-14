@@ -19,7 +19,9 @@
         <p><%= link_to "編集する", "/user_posts/#{user_post.id}/edit" %></p>
         <p><%= link_to "コメントを見る", "/comments/#{user_post.id}/new" %></p>
       <% end %>
-    </li>
+    </li><br /><br />
+
+    <%= will_paginate @user_posts, :renderer => BootstrapPagination::Rails %>
 
   <% else %>
     まだ投稿はありません。
