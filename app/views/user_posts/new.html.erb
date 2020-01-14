@@ -3,12 +3,21 @@
 <div class="form-group">
   <%= bootstrap_form_for(@user_post) do |f| %>
     <%= render 'shared/error_messages', model: f.object %>
-    <%= f.text_field :title, label: "タイトル" %><br />
-    <%= f.text_field :image, label: "画像URL" %><br />
-    <%= f.text_area :content, label: "記事" %><br />
+    <%= f.text_field :title, label: "タイトル" %>
+    <em>(最大 30文字)</em><br /><br />
+
+    <%= f.text_field :image, label: "画像URL" %>
+    <em>(最大 200文字)</em><br /><br />
+
+    <%= f.text_area :content, label: "記事" %>
+    <em>(最大 140文字)</em><br /><br />
+
     <%= f.select :category, ["日記", "動物", "旅行", "スポーツ", "音楽", "アイドル", "写真", "その他" ], label: "カテゴリー" %><br />
+
     <%= f.check_box :invisible, label: "非公開にする" %><br />
+
     <%= f.datetime_select :release_date,:prefix=>"release_date_input", label: "公開日時を指定する" %><br />
-    <%= f.submit "投稿",　class: 'btn btn-primary' %>
+
+    <%= f.submit "投稿する",　class: 'btn btn-primary' %>
   <% end %>
 </div>

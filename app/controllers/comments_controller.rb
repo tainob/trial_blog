@@ -12,11 +12,10 @@ class CommentsController < ApplicationController
     redirect_to(new_user_session_path) unless user_signed_in?
 
     @comment = Comment.find(params[:id])
-    if @comment.destroy
-      redirect_to("/")
-    else
-      render :new
-    end
+    @user_post_id = @comment.user_post_id   #削除前に親idを退避
+
+    flash[:error] = @comment.errors.full_messages.first unless @comment.destroy
+    redirect_back(fallback_location: "comments/#{@user_post_id}/new")
   end
 
   #DB書込み
@@ -30,11 +29,7 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @user_post_id = params[:comment][:user_post_id]
 
-    if @comment.save
-      redirect_to("/")
-    else
-      flash[:error] = @comment.errors.full_messages.first
-      redirect_back(fallback_location: "comments/#{@user_post_id}/new")
-    end
+    flash[:error] = @comment.errors.full_messages.first unless @comment.save
+    redirect_back(fallback_location: "comments/#{@user_post_id}/new")
   end
 end

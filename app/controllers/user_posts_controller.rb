@@ -25,9 +25,7 @@ class UserPostsController < ApplicationController
                   .where(category: @category)
 
     #ログイン済の場合、自分の書き込みを除外する
-    if user_signed_in?
-      @user_posts = @user_posts.where.not(user_id: current_user.id)
-    end
+    @user_posts = @user_posts.where.not(user_id: current_user.id) if user_signed_in?
   end
 
   #登録ページ

@@ -41,7 +41,10 @@
     <%= bootstrap_form_for(@comment) do |f| %>
       <%= render 'shared/flash_messages' %>
       <%= f.hidden_field :user_post_id, :value => @user_post.id %><br />
-      <%= f.text_area :content, label: "." %><br />
+
+      <%= f.text_area :content, label: "." %>
+      <em>(最大 140文字)</em><br /><br />
+
       <%= f.submit "投稿",　class: 'btn btn-primary' %>
     <% end %>
   </div>
