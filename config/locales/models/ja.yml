@@ -1,0 +1,13 @@
+ja:
+  activerecord:
+    models:
+      user_post: 投稿
+      comment: コメント
+    attributes:
+      user_post:
+        title: タイトル
+        image: 画像URL
+        content: 記事
+        category: カテゴリー
+      comment:
+        content: コメント
