@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!, except: [:new]
+
   #一覧・登録ページ
   def new
     @comment = Comment.new
@@ -11,9 +13,6 @@ class CommentsController < ApplicationController
 
   #削除
   def destroy
-    #ログイン前の場合、ログイン画面に遷移
-    redirect_to(new_user_session_path) unless user_signed_in?
-
     @comment = Comment.find(params[:id])
     @user_post_id = @comment.user_post_id
 
@@ -25,9 +24,6 @@ class CommentsController < ApplicationController
 
   #DB書込み
   def create
-    #ログイン前の場合、ログイン画面に遷移
-    redirect_to(new_user_session_path) unless user_signed_in?
-
     @comment = Comment.new
     @comment.user_post_id = params[:comment][:user_post_id]
     @comment.content = params[:comment][:content]

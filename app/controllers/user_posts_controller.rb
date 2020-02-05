@@ -6,9 +6,6 @@ class UserPostsController < ApplicationController
 
   #自分の投稿一覧ページ
   def mylist
-    #ログイン前の場合、ログイン画面に遷移
-    redirect_to(new_user_session_path) unless user_signed_in?
-
     @category = params[:category]
     @user_posts = UserPost.order(create_date: :DESC)
                     .where(category: @category)
@@ -27,35 +24,23 @@ class UserPostsController < ApplicationController
                   .where(invisible: false)
                   .where(category: @category)
 
-    #ログイン済の場合、自分の書き込みを除外する
-    @user_posts = @user_posts.where.not(user_id: current_user.id) if user_signed_in?
-
     #ページング処理
     @user_posts = @user_posts.paginate(:page => params[:page], :per_page => 10)
   end
 
   #登録ページ
   def new
-    #ログイン前の場合、ログイン画面に遷移
-    redirect_to(new_user_session_path) unless user_signed_in?
-
     @user_post = UserPost.new
   end
 
   #編集ページ
   def edit
-    #ログイン前の場合、ログイン画面に遷移
-    redirect_to(new_user_session_path) unless user_signed_in?
-
     @user_post = UserPost.find(params[:id])
     #ログイン前の場合、ログイン画面に遷移
   end
 
   #更新
   def update
-    #ログイン前の場合、ログイン画面に遷移
-    redirect_to(new_user_session_path) unless user_signed_in?
-
     @user_post = UserPost.find(params[:id])
     if @user_post.update(
                       title: params[:user_post][:title],
@@ -71,9 +56,6 @@ class UserPostsController < ApplicationController
 
   #削除
   def destroy
-    #ログイン前の場合、ログイン画面に遷移
-    redirect_to(new_user_session_path) unless user_signed_in?
-
     @user_post = UserPost.find(params[:id])
     if @user_post.destroy
       redirect_to("/")
@@ -84,9 +66,6 @@ class UserPostsController < ApplicationController
 
   #DB書込み
   def create
-    #ログイン前の場合、ログイン画面に遷移
-    redirect_to(new_user_session_path) unless user_signed_in?
-
     @user_post = UserPost.new(user_post_params)
 
     @user_post.title = params[:user_post][:title]
