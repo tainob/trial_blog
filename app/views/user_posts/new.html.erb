@@ -1,5 +1,7 @@
 <h3>投稿する</h3>
 
+<%= render 'shared/flash_messages' %>
+
 <div class="form-group">
   <%= bootstrap_form_for(@user_post) do |f| %>
     <%= render 'shared/error_messages', model: f.object %>
@@ -16,7 +18,7 @@
 
     <%= f.check_box :invisible, label: "非公開にする" %><br />
 
-    <%= f.datetime_select :release_date,:prefix=>"release_date_input", label: "公開日時を指定する" %><br />
+    <%= f.datetime_select :release_date, label: "公開日時を指定する" %><br />
 
     <%= f.submit "投稿する",　class: 'btn btn-primary' %>
   <% end %>

@@ -36,18 +36,12 @@ class UserPostsController < ApplicationController
   #編集ページ
   def edit
     @user_post = UserPost.find(params[:id])
-    #ログイン前の場合、ログイン画面に遷移
   end
 
   #更新
   def update
     @user_post = UserPost.find(params[:id])
-    if @user_post.update(
-                      title: params[:user_post][:title],
-                      image: params[:user_post][:image],
-                      content: params[:user_post][:content],
-                      category: params[:user_post][:category],
-                      invisible: params[:user_post][:invisible])
+    if @user_post.update(user_post_params)
       redirect_to("/")
     else
       render :edit
@@ -64,31 +58,9 @@ class UserPostsController < ApplicationController
     end
   end
 
-  #DB書込み
+  #新規投稿
   def create
     @user_post = UserPost.new(user_post_params)
-
-    @user_post.title = params[:user_post][:title]
-    @user_post.image = params[:user_post][:image]
-    @user_post.content = params[:user_post][:content]
-    @user_post.category = params[:user_post][:category]
-
-    #非表示設定
-    if params[:user_post][:invisible].nil?
-      @user_post.invisible = false
-    else
-      @user_post.invisible = params[:user_post][:invisible]
-    end if
-
-    @user_post.create_date = DateTime.now
-
-    #公開日
-#    if params[:user_post][:release_date].nil?
-#      @user_post.release_date = DateTime.now
-#    else
-#      @user_post.release_date = params[:user_post][:release_date]
-#    end if
-
     @user_post.user = current_user
 
     if @user_post.save
@@ -101,7 +73,8 @@ class UserPostsController < ApplicationController
   private
 
     def user_post_params
-      params.permit(:title, :image, :content, :category, :invisible, :create_date, :release_date, :user_id)
+      params.require(:user_post).permit(
+        :title, :image, :content, :category, :invisible, :create_date, :release_date, :user_id)
     end
 
 end

@@ -11,12 +11,11 @@ class UserPost < ApplicationRecord
   validates :image, length: { maximum: 200 }, format: { with: VALID_URL_REGEX }
   validates :category, presence: true, inclusion: { in: %w(日記 動物 旅行 スポーツ 音楽 アイドル 写真 その他) }
   validates :invisible, inclusion: { in: [true, false] }
+  validates :release_date, presence: true
 
   private
 
     def change_date_format
-      self.invisible = true  if self.invisible.nil?
       self.create_date = DateTime.now  if self.create_date.nil?
-      self.release_date = DateTime.now  if self.release_date.nil?
     end
 end
