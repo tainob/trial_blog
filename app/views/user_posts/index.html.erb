@@ -2,7 +2,7 @@
 
 <%= render 'shared/flash_messages' %>
 
-<h3><%= link_to "ブログを書く", "new" %></h3>
+<h3><%= link_to "ブログを書く", new_user_post_url %></h3>
 
 <% if user_signed_in? %>
   <h3>〜 過去の投稿 〜</h3>

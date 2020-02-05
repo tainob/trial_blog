@@ -1,11 +1,21 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+post_one:
+  title: "テストタイトル"
+  image: "http://www.test.com/test.jpg"
+  content: "テスト記事"
+  category: "動物"
+  invisible: 0
+  create_date: DateTime.now
+  release_date: DateTime.now
+  user: one
 
-# This model initially had no columns defined. If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+<% 11.times do |n| %>
+post<%= n %>:
+  title: "テストタイトル#{n}"
+  image: "http://www.test.com/test.jpg"
+  content: "テスト記事#{n}"
+  category: "日記"
+  invisible: 0
+  create_date: DateTime.now
+  release_date: DateTime.now
+  user: two
+<% end %>
