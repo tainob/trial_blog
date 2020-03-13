@@ -36,11 +36,13 @@ class UserPostsController < ApplicationController
   #編集ページ
   def edit
     @user_post = UserPost.find(params[:id])
+    redirect_to("/") if current_user.id != @user_post.user_id
   end
 
   #更新
   def update
     @user_post = UserPost.find(params[:id])
+    redirect_to("/") if current_user.id != @user_post.user_id
     if @user_post.update(user_post_params)
       redirect_to("/")
     else
@@ -51,6 +53,7 @@ class UserPostsController < ApplicationController
   #削除
   def destroy
     @user_post = UserPost.find(params[:id])
+    redirect_to("/") if current_user.id != @user_post.user_id
     if @user_post.destroy
       redirect_to("/")
     else

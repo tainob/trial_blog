@@ -2,7 +2,7 @@ post_one:
   title: "テストタイトル"
   image: "http://www.test.com/test.jpg"
   content: "テスト記事"
-  category: "動物"
+  category: "日記"
   invisible: 0
   create_date: DateTime.now
   release_date: DateTime.now
@@ -13,9 +13,9 @@ post<%= n %>:
   title: "テストタイトル#{n}"
   image: "http://www.test.com/test.jpg"
   content: "テスト記事#{n}"
-  category: "日記"
+  category: "旅行"
   invisible: 0
-  create_date: DateTime.now
+  create_date: DateTime.now + n.minutes
   release_date: DateTime.now
-  user: two
+  user: one
 <% end %>
